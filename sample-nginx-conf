@@ -1,0 +1,25 @@
+server {	
+	listen 80;
+	server_name coffeeandgrit.com;
+	
+	location / {
+		proxy_pass http://localhost:2101;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_cache_bypass $http_upgrade;
+	}
+
+	location /sample-docs/ {
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header HOST $http_host;
+		proxy_set_header X-NginX-Proxy true;
+
+		proxy_pass http://localhost:8000;
+		proxy_redirect off;
+		rewrite ^/sample-docs/(.*)$ /$1 break;
+		#index index.html;
+		#alias /root/sample-docs/site;
+		#root /root/sample-docs/site;
+	}
+}
