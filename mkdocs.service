@@ -2,7 +2,7 @@
 Description="mkdocs service"
 
 [Service]
-ExecStart=/bin/bash -c "cd /root/cng/sandboxes/mkdocs-simple && /usr/local/bin/mkdocs serve"
+ExecStart=/bin/bash -c "cd /root/cng/sandboxes/mkdocs-sample && /usr/local/bin/mkdocs serve"
 
 [Install]
 WantedBy=multi-user.target
